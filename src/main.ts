@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain, Notification } from 'electron';
 import path from 'path';
 import { updateElectronApp } from 'update-electron-app';
 
@@ -15,6 +15,19 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
+  });
+
+  ipcMain.on('set-title', (event, title) => {
+    const webContents = event.sender;
+    const win = BrowserWindow.fromWebContents(webContents);
+    win.setTitle(title);
+  });
+
+  ipcMain.on('send-notification', (event, title, body) => {
+    new Notification({
+      title: title,
+      body: body,
+    }).show();
   });
 
   // and load the index.html of the app.
