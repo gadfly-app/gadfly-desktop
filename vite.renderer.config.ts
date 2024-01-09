@@ -12,4 +12,9 @@ export default defineConfig({
     }),
     vuetify({ autoImport: true }),
   ],
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.esm-bundler.js',
+    },
+  },
 });

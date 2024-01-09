@@ -1,4 +1,7 @@
 <script setup>
+import { useRouter } from 'vue-router';
+
+
 console.log('👋 This message is being logged by "App.vue", included via Vite');
 
 import { useAuth0 } from '@auth0/auth0-vue';
@@ -9,9 +12,19 @@ function testClick() {
   window.electronAPI.sendNotification('Set Title', 'done')
 }
 
-function onLogout() {
-  logout({ logoutParams: { returnTo: 'http://localhost/callback' } });
+async function onLogout() {
+  await logout({ logoutParams: { returnTo: 'http://localhost/callback' } });
 }
+
+const router = useRouter();
+
+router.beforeEach((to, from, next) => {
+
+  console.log("beforeach");
+});
+
+router.afterEach((to, from) => {
+});
 </script>
 
 <template>
