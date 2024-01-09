@@ -44,6 +44,7 @@ const config: ForgeConfig = {
           name: 'gadfly-desktop',
         },
         prerelease: false,
+        force: true,
       },
     },
   ],
