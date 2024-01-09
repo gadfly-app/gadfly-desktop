@@ -30,6 +30,25 @@ const createWindow = () => {
     }).show();
   });
 
+  mainWindow.webContents.on('will-redirect', (event, url) => {
+    if (url.startsWith('http://localhost/callback')) {
+      event.preventDefault();
+      const search = url.split('?')[1];
+
+      if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+        mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL + '?' + search).catch((error) => {
+          console.error(`Failed to load URL: ${error.message}`);
+        });
+      } else {
+        mainWindow
+          .loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`), { search })
+          .catch((error) => {
+            console.error(`Failed to load URL: ${error.message}`);
+          });
+      }
+    }
+  });
+
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);

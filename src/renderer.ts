@@ -16,7 +16,7 @@ const auth0 = createAuth0({
   domain: 'gadfly-dev.us.auth0.com',
   clientId: 'tZoRcemtkAokAwfo0mMUyHgeJVbd73G4',
   authorizationParams: {
-    redirect_uri: window.location.origin,
+    redirect_uri: 'http://localhost/callback',
     scope: 'openid email profile offline_access',
     prompt: 'select_account',
   },

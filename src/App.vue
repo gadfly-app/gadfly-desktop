@@ -10,7 +10,7 @@ function testClick() {
 }
 
 function onLogout() {
-  logout({ logoutParams: { returnTo: window.location.origin } });
+  logout({ logoutParams: { returnTo: 'http://localhost/callback' } });
 }
 </script>
 
