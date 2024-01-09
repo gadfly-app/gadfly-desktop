@@ -2,6 +2,14 @@
   "name": "gadfly-desktop",
   "productName": "gadfly-desktop",
   "version": "1.0.0",
+  "author": {
+    "name": "Gadfly",
+    "email": "support@gadflyapp.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gadfly-app/gadfly-desktop.git"
+  },
   "description": "Gadfly desktop app",
   "main": ".vite/build/main.js",
   "scripts": {
@@ -20,6 +28,7 @@
     "@electron-forge/maker-zip": "^7.2.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
     "@electron-forge/plugin-vite": "^7.2.0",
+    "@electron-forge/publisher-github": "^7.2.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-vue": "^5.0.2",
@@ -31,6 +40,7 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
+    "update-electron-app": "^3.0.0",
     "vue": "^3.4.7"
   }
 }
