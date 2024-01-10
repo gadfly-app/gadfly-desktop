@@ -1,17 +1,20 @@
 import { createAuth0 } from '@auth0/auth0-vue';
 import { createApp } from 'vue';
-import { createRouter, createWebHashHistory } from 'vue-router';
-import App from './App.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import App from './app.vue';
 
 import '@mdi/font/css/materialdesignicons.css';
 
 import { createVuetify } from 'vuetify';
 import 'vuetify/styles';
 
-const routes = [{ path: '/', name: 'home', component: App }];
+const routes = [
+  { path: '/', name: 'home', component: () => import('./pages/home.vue') },
+  { path: '/settings', name: 'settings', component: () => import('./pages/settings.vue') },
+];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
@@ -32,4 +35,11 @@ const auth0 = createAuth0({
   useRefreshTokens: true,
 });
 
-createApp({}).use(router).use(auth0).use(vuetify).mount('#app');
+const app = createApp(App);
+app.use(router);
+app.use(auth0);
+app.use(vuetify);
+
+router.isReady().then(() => {
+  app.mount('#app');
+});

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Notification } from 'electron';
+import { app, BrowserWindow, ipcMain, Notification, screen } from 'electron';
 import path from 'path';
 import { updateElectronApp } from 'update-electron-app';
 
@@ -7,11 +7,18 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+app.setLoginItemSettings({
+  openAtLogin: true,
+});
+
 const createWindow = () => {
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const { width, height } = primaryDisplay.workAreaSize;
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: Math.min(1600, width),
+    height: Math.min(800, height),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
